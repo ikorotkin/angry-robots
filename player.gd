@@ -1,5 +1,8 @@
 extends Area2D
 
+
+signal hit
+
 # Player's speed (pixels/sec)
 @export var speed: int = 400
 
@@ -13,6 +16,10 @@ var boost_time: float = 0.2
 # Boost cooldown (sec)
 @export_range(0, 5, 0.1, "suffix:s", "or_greater")
 var boost_cooldown_time: float = 2
+
+# Boost color
+@export_color_no_alpha
+var boost_color: Color = Color(1, 0.5, 1)
 
 # Player's state (accelerated or not)
 var is_boost: bool = false
@@ -33,6 +40,7 @@ var screen_size: Vector2i
 # Called when the node enters
 # the scene tree for the first time.
 func _ready() -> void:
+	hide()
 	screen_size = get_viewport_rect().size
 
 	# Initialize boost timer
@@ -68,6 +76,7 @@ func _process(delta: float) -> void:
 			timer_cooldown.start()
 			is_boost = true
 			is_cooldown = true
+			$Sprite2D.modulate = boost_color
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -97,4 +106,21 @@ func boost_timer_timeout() -> void:
 # Called when boost cooldown timer triggered
 func cooldown_timer_timeout() -> void:
 	is_cooldown = false
+	$Sprite2D.modulate = Color(1, 1, 1)
 	print("Cooldown time out")
+
+
+# Called when an enemy hits the player
+func _on_body_entered(body: Node2D) -> void:
+	hide() # Player disappears after being hit
+	hit.emit() # Emits the 'hit' signal
+	# Must be deferred as we can't change
+	# physics properties on a physics callback.
+	$CollisionShape2D.set_deferred("disabled", true)
+
+
+# Called to reset the player when starting a new game
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
