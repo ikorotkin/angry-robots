@@ -112,11 +112,9 @@ func cooldown_timer_timeout() -> void:
 
 # Called when an enemy hits the player
 func _on_body_entered(body: Node2D) -> void:
-	hide() # Player disappears after being hit
-	hit.emit() # Emits the 'hit' signal
-	# Must be deferred as we can't change
-	# physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
+	# Emits the 'hit' signal and passes
+	# the 'body' that collided with the player
+	hit.emit(body)
 
 
 # Called to reset the player when starting a new game
