@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdte2ftg6qu1k"]
+[gd_scene load_steps=7 format=3 uid="uid://bdte2ftg6qu1k"]
 
 [ext_resource type="FontFile" uid="uid://b81lok3nrqofl" path="res://fonts/BrunoAceSC-Regular.ttf" id="1_5mb7e"]
 [ext_resource type="Script" path="res://hud.gd" id="1_q1mka"]
+[ext_resource type="AudioStream" uid="uid://p3e1b3il5wqg" path="res://music/menu.ogg" id="3_t6w47"]
+[ext_resource type="AudioStream" uid="uid://d1od6dml23uow" path="res://sounds/select.wav" id="4_gppev"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_i5qye"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_5kees"]
+events = [SubResource("InputEventAction_i5qye")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_q1mka")
@@ -72,11 +80,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_5mb7e")
 theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_5kees")
 text = "Start!"
 
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_t6w47")
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gppev")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

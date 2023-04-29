@@ -8,7 +8,7 @@ signal start_game
 # Called when the node enters
 # the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$MenuMusic.play()
 
 
 # Called every frame.
@@ -36,6 +36,7 @@ func show_game_over():
 	# Make a one-shot timer and wait for it to finish
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show() # Show the button
+	$MenuMusic.play()
 
 
 # Updates the score label
@@ -56,4 +57,6 @@ func _on_message_timer_timeout() -> void:
 # Called when the 'Start' button pressed
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()
+	$MenuMusic.stop()
+	$ClickSound.play()
 	start_game.emit()

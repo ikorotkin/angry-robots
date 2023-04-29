@@ -27,12 +27,14 @@ func _process(_delta: float) -> void:
 func _on_player_hit(body: Node2D) -> void:
 	if $Player.is_boost:
 		print("Enemy got hit!")
+		$HitSound.play()
 		score += 10
 		$HUD.update_score(score)
 		body.modulate = Color(0.5, 0, 0)
 		body.gravity_scale = 1
 	else:
 		print("Game over!")
+		$GameOverSound.play()
 		game_over()
 
 
@@ -47,6 +49,7 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+	$GameMusic.stop()
 
 	# Updates the highest score
 	if score > highest_score:
@@ -101,3 +104,4 @@ func _on_score_timer_timeout() -> void:
 func _on_start_timer_timeout() -> void:
 	$MobTimer.start()
 	$ScoreTimer.start()
+	$GameMusic.play()

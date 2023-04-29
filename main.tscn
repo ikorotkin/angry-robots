@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://vkajdr5g7nm"]
+[gd_scene load_steps=9 format=3 uid="uid://vkajdr5g7nm"]
 
 [ext_resource type="PackedScene" uid="uid://nxu422j8cpeg" path="res://player.tscn" id="1_0lqt3"]
 [ext_resource type="Script" path="res://main.gd" id="1_i7ymp"]
 [ext_resource type="PackedScene" uid="uid://mn6ttvnda7lv" path="res://mob.tscn" id="2_d6kvg"]
 [ext_resource type="PackedScene" uid="uid://bdte2ftg6qu1k" path="res://hud.tscn" id="4_asq8g"]
+[ext_resource type="AudioStream" uid="uid://dnywl55o618mj" path="res://sounds/hit.wav" id="6_g46o1"]
+[ext_resource type="AudioStream" uid="uid://8g7lourifttt" path="res://music/battle.ogg" id="6_lrdyo"]
+[ext_resource type="AudioStream" uid="uid://c68ig38p0xn2a" path="res://sounds/crashed.wav" id="7_aixf5"]
 
 [sub_resource type="Curve2D" id="Curve2D_r44yl"]
 _data = {
@@ -14,6 +17,14 @@ point_count = 5
 [node name="Main" type="Node"]
 script = ExtResource("1_i7ymp")
 mob_scene = ExtResource("2_d6kvg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243137, 0.345098, 0.572549, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_0lqt3")]
 
@@ -35,6 +46,16 @@ curve = SubResource("Curve2D_r44yl")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobSpawnPath"]
 
 [node name="HUD" parent="." instance=ExtResource("4_asq8g")]
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_lrdyo")
+volume_db = -10.0
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_g46o1")
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_aixf5")
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

@@ -77,6 +77,7 @@ func _process(delta: float) -> void:
 			is_boost = true
 			is_cooldown = true
 			$Sprite2D.modulate = boost_color
+			$BoostSound.play()
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
