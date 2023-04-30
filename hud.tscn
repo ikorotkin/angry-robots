@@ -81,6 +81,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_5mb7e")
 theme_override_font_sizes/font_size = 64
 shortcut = SubResource("Shortcut_5kees")
+shortcut_in_tooltip = false
 text = "Start!"
 
 [node name="MessageTimer" type="Timer" parent="."]
