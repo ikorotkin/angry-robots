@@ -4,7 +4,9 @@ A fully functional 2D game prototype created using **Godot 4** and **GDScript**.
 
 The idea of the game is similar to [Dodge the Creeps!](https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html) from the Godot's User Manual:
 
-![The game idea sketch](images/angry_robots_sketch.png "The game idea sketch")
+<p style="text-align:center;">
+<img src="images/angry_robots_sketch.png" alt="The game idea sketch" width="560"/>
+</p>
 
 1. **Main menu:** Shows "Angry Robots" in the center of the screen, the current and the highest score, and the "Start" button.
 
@@ -22,11 +24,15 @@ The idea of the game is similar to [Dodge the Creeps!](https://docs.godotengine.
 
 ## The main menu screenshot
 
-![The main menu screenshot](images/angry_robots_menu.png "The main menu screenshot")
+<p style="text-align:center;">
+<img src="images/angry_robots_menu.png" alt="The main menu screenshot" width="520"/>
+</p>
 
 ## The gameplay screenshot
 
-![The gameplay screenshot](images/angry_robots_game.png "The gameplay screenshot")
+<p style="text-align:center;">
+<img src="images/angry_robots_game.png" alt="The gameplay screenshot" width="520"/>
+</p>
 
 ## Video
 
